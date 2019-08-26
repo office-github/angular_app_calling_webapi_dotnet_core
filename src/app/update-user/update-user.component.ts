@@ -1,15 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
+import { UserService } from '../services/user.service';
+import { User } from '../models/user';
 
 @Component({
   selector: 'app-update-user',
   templateUrl: './update-user.component.html',
   styleUrls: ['./update-user.component.css']
 })
-export class UpdateUserComponent implements OnInit {
+export class UpdateUserComponent implements AfterViewInit {
+  constructor(private userService: UserService) { }
 
-  constructor() { }
+  isUpdated: boolean;
 
-  ngOnInit() {
+  ngAfterViewInit(): void {
+    console.log("update studnet clicked")
+    this.userService.updateUser(new User())
+      .subscribe((isSuccess: boolean) => {
+        this.isUpdated = isSuccess;
+        console.log(`Update: ${isSuccess}`);
+      });
   }
-
 }
