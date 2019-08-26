@@ -1,4 +1,6 @@
 import { Component, AfterViewInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+
 import { AttendaceService } from '../services/attendace.service';
 import { Attendance } from '../models/attendance';
 
@@ -8,7 +10,7 @@ import { Attendance } from '../models/attendance';
   styleUrls: ['./show-attendance.component.css']
 })
 export class ShowAttendanceComponent implements AfterViewInit {
-  constructor(private attendanceService: AttendaceService) { }
+  constructor(private toastr: ToastrService, private attendanceService: AttendaceService) { }
 
   attendanceList: Array<Attendance> = [];
 
@@ -24,6 +26,7 @@ export class ShowAttendanceComponent implements AfterViewInit {
           })
         });
 
+        this.toastr.success('Show Attendance', 'Successfull');
         console.log(this.attendanceList);
       });
   }

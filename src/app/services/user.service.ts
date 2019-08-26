@@ -39,7 +39,7 @@ export class UserService {
     );
   }
 
-  delteUser(symbolNo: number) {
+  deleteUser(symbolNo: number) {
     return this.http.delete(
       `${this.configUrl}/${symbolNo}`
     ).pipe(

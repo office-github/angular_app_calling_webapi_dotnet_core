@@ -1,6 +1,7 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { AttendaceService } from '../services/attendace.service';
 import { Attendance } from '../models/attendance';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-search-attendance',
@@ -8,12 +9,20 @@ import { Attendance } from '../models/attendance';
   styleUrls: ['./search-attendance.component.css']
 })
 export class SearchAttendanceComponent implements AfterViewInit {
-  constructor(private attendanceService: AttendaceService) { }
+  constructor(private toaster: ToastrService, private attendanceService: AttendaceService) { }
 
   attendanceList: Array<Attendance> = [];
+  symbolNumber: number;
 
   ngAfterViewInit(): void {
-    console.log("show attendance clicked")
+    
+  }
+
+  searchAttendance() {
+    console.log("search student clicked")
+    
+    if(this.symbolNumber) {
+      console.log("show attendance clicked")
     this.attendanceService.searchAttendance(1)
       .subscribe((attendanceList: Attendance[]) => {
         attendanceList.forEach(attendance => {
@@ -25,6 +34,16 @@ export class SearchAttendanceComponent implements AfterViewInit {
         });
 
         console.log(this.attendanceList);
+        if(this.attendanceList) {
+          this.toaster.success("Found", "Successfully")
+        }
+        else {
+          this.toaster.warning("Not found");
+        }
+      },
+      (errror) => {
+        this.toaster.error("Error occured", "Please Try again later.")
       });
+    }
   }
 }

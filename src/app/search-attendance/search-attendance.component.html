@@ -1,1 +1,12 @@
-<p>search-attendance works!</p>
+<div>
+    <input type="number" [(ngModel)]="symbolNumber" />
+    <input type="submit" (click)="searchAttendance()" />
+</div>
+
+<div *ngIf="attendanceList">
+    <ul *ngFor="let attendance of attendanceList">
+        <li>{{ attendance.symbolNumber }}</li>
+        <li>{{ attendance.attendanceDate}}</li>
+        <li>{{ attendance.isPresent }}</li>
+    </ul>
+</div>

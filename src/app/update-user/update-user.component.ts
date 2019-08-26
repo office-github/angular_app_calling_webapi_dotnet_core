@@ -1,6 +1,7 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { User } from '../models/user';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-update-user',
@@ -8,16 +9,29 @@ import { User } from '../models/user';
   styleUrls: ['./update-user.component.css']
 })
 export class UpdateUserComponent implements AfterViewInit {
-  constructor(private userService: UserService) { }
-
   isUpdated: boolean;
+  
+  constructor(private toaster: ToastrService, private userService: UserService) { }
 
   ngAfterViewInit(): void {
+  }
+
+  updateUser(user: User) {
     console.log("update studnet clicked")
-    this.userService.updateUser(new User())
+    this.userService.updateUser(user)
       .subscribe((isSuccess: boolean) => {
         this.isUpdated = isSuccess;
-        console.log(`Update: ${isSuccess}`);
+        console.log(`Update Student: ${isSuccess}`);
+
+        if(isSuccess) {
+          this.toaster.success("Student Updated Successfully");
+        }
+        else {
+          this.toaster.warning("Update Failed, Try again later.");
+        }
+      },
+      (error) => {
+        this.toaster.error("Error Occured");
       });
   }
 }

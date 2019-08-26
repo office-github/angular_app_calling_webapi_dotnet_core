@@ -1,1 +1,9 @@
-<p>show-attendance works!</p>
+<mat-progress-bar mode="Indeterminate" *ngIf="attendanceList.length <= 0"></mat-progress-bar>
+
+<div *ngIf="attendanceList">
+    <ul *ngFor="let attendance of attendanceList" style="display: block">
+        <li>{{ attendance.symbolNumber }}</li>
+        <li>{{ attendance.attendanceDate}}</li>
+        <li>{{ attendance.isPresent }}</li>
+    </ul>
+</div>

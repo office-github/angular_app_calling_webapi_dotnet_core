@@ -1,1 +1,13 @@
 <p>search-user works!</p>
+
+<div>
+    <input type="number" [(ngModel)]="symbolNumber" />
+    <input type="submit" (click)="searchUser()" />
+
+    <ul *ngIf="user">
+        <li>{{ user.symbolNumber }}</li>
+        <li>{{ user.fullName}}</li>
+        <li>{{ user.email }}</li>
+        <li>{{ user.phoneNo }}</li>
+    </ul>
+</div>

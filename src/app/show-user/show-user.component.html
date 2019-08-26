@@ -1,1 +1,10 @@
-<p>show-user works!</p>
+<mat-progress-bar mode="Indeterminate" *ngIf="!users"></mat-progress-bar>
+
+<div *ngIf="users">
+    <ul *ngFor="let user of users" style="display: block">
+        <li>{{ user.symbolNumber }}</li>
+        <li>{{ user.fullName}}</li>
+        <li>{{ user.email }}</li>
+        <li>{{ user.phoneNo }}</li>
+    </ul>
+</div>

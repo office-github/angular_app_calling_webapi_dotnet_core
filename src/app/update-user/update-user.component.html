@@ -1,1 +1,17 @@
-<p>update-user works!</p>
+<form #form='ngForm' ngNativeValidate (ngSubmit)='updateUser(form.value)'>
+        <div>
+            <input type="number" [(ngModel)]="symbolNumber" name="symbolNumber" placeholder="Enter Symbol Number" required />
+        </div>
+        <div>
+            <input type="text" [(ngModel)]="fullName" name="fullName" placeholder="Enter Full Name" required />
+        </div>
+        <div>
+            <input type="email" [(ngModel)]="email" name="email" placeholder="Enter Email" required />
+        </div>
+        <div>
+            <input type="number" [(ngModel)]="phoneNo" name="phoneNo" placeholder="Enter Phone Number" required/>
+        </div>
+        <div>
+            <button type="submit">Update User</button>>
+        </div>
+    </form>
