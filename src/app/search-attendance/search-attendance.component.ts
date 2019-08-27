@@ -13,7 +13,8 @@ export class SearchAttendanceComponent implements AfterViewInit {
 
   attendanceList: Array<Attendance> = [];
   symbolNumber: number;
-  isLoaded: boolean = true;;
+  isLoaded: boolean = true;
+  isAttendance: boolean;
 
   ngAfterViewInit(): void {
 
@@ -22,10 +23,11 @@ export class SearchAttendanceComponent implements AfterViewInit {
   searchAttendance() {
     console.log("search student clicked")
     this.isLoaded = false;
+    this.attendanceList = [];
 
     if (this.symbolNumber) {
       console.log("show attendance clicked")
-      this.attendanceService.searchAttendance(1)
+      this.attendanceService.searchAttendance(this.symbolNumber)
         .subscribe((attendanceList: Attendance[]) => {
           attendanceList.forEach(attendance => {
             this.attendanceList.push({
@@ -36,18 +38,20 @@ export class SearchAttendanceComponent implements AfterViewInit {
           });
 
           console.log(this.attendanceList);
-          if (this.attendanceList) {
+          if (this.attendanceList.length > 0) {
             this.toaster.success("Found", "Successfully")
           }
           else {
-            this.toaster.warning("Student Not found");
+            this.toaster.warning("Attendance Not found");
           }
 
           this.isLoaded = true;
+          this.isAttendance = true;
         },
           (errror) => {
             this.toaster.error("Error occured. Please Try again later.")
             this.isLoaded = true;
+            this.isAttendance = true;
           });
     }
   }

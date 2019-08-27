@@ -14,7 +14,7 @@
         <div style="text-align: center" *ngIf="!isLoaded" class="spinner-border"></div>
     </div>
 
-    <table class="table table-striped" *ngIf="attendance">
+    <table class="table table-striped" *ngIf="isAttendance && isLoaded">
         <thead>
             <th>Symbol Number</th>
             <th>Attendance Date</th>
@@ -25,6 +25,11 @@
                 <td>{{ attendance.symbolNumber}}</td>
                 <td>{{ attendance.attendanceDate}}</td>
                 <td>{{ attendance.isPresent}}</td>
+            </tr>
+            <tr *ngIf="attendanceList.length == 0">
+                <td></td>
+                <td>Not Available</td>
+                <td></td>
             </tr>
         </tbody>
     </table>
