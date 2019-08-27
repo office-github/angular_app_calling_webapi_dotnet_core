@@ -10,8 +10,11 @@
         </div>
     </form>
 
-    <div style="text-align: center" *ngIf="attendanceList.length == 0" class="spinner-border"></div>
-    <table class="table table-striped">
+    <div style="text-align: center">
+        <div style="text-align: center" *ngIf="!isLoaded" class="spinner-border"></div>
+    </div>
+
+    <table class="table table-striped" *ngIf="attendance">
         <thead>
             <th>Symbol Number</th>
             <th>Attendance Date</th>

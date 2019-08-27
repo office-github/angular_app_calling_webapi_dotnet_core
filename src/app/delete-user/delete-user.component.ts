@@ -9,8 +9,9 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class DeleteUserComponent implements AfterViewInit {
   isDeleted: boolean;
-  symbolNumber: number;  
-  
+  symbolNumber: number;
+  isLoaded: boolean = true;
+
   constructor(private toaster: ToastrService, private userService: UserService) { }
 
   ngAfterViewInit(): void {
@@ -19,6 +20,7 @@ export class DeleteUserComponent implements AfterViewInit {
 
   deleteUser() {
     console.log("delete student clicked")
+    this.isLoaded = false;
 
     if (this.symbolNumber) {
       this.userService.deleteUser(this.symbolNumber)
@@ -26,14 +28,16 @@ export class DeleteUserComponent implements AfterViewInit {
           this.isDeleted = isSuccess;
           console.log(`Delete: ${isSuccess}`);
 
-          if(this.isDeleted)
+          if (this.isDeleted)
             this.toaster.success("Deleted Successfully");
-          else 
-            this.toaster.warning("Not found");
+          else
+            this.toaster.warning("Student Not found");
+          this.isLoaded = true;
         },
-        (error) => {
-          this.toaster.error("Failed. Please Try again later.");
-        });
+          (error) => {
+            this.toaster.error("Failed. Please Try again later.");
+            this.isLoaded = true;
+          });
     }
   }
 }

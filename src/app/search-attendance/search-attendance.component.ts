@@ -13,37 +13,42 @@ export class SearchAttendanceComponent implements AfterViewInit {
 
   attendanceList: Array<Attendance> = [];
   symbolNumber: number;
+  isLoaded: boolean = true;;
 
   ngAfterViewInit(): void {
-    
+
   }
 
   searchAttendance() {
     console.log("search student clicked")
-    
-    if(this.symbolNumber) {
-      console.log("show attendance clicked")
-    this.attendanceService.searchAttendance(1)
-      .subscribe((attendanceList: Attendance[]) => {
-        attendanceList.forEach(attendance => {
-          this.attendanceList.push({
-            symbolNumber: attendance['symbolNumber'],
-            attendanceDate: attendance["attendanceDate"],
-            isPresent: attendance['isPresent']
-          })
-        });
+    this.isLoaded = false;
 
-        console.log(this.attendanceList);
-        if(this.attendanceList) {
-          this.toaster.success("Found", "Successfully")
-        }
-        else {
-          this.toaster.warning("Not found");
-        }
-      },
-      (errror) => {
-        this.toaster.error("Error occured", "Please Try again later.")
-      });
+    if (this.symbolNumber) {
+      console.log("show attendance clicked")
+      this.attendanceService.searchAttendance(1)
+        .subscribe((attendanceList: Attendance[]) => {
+          attendanceList.forEach(attendance => {
+            this.attendanceList.push({
+              symbolNumber: attendance['symbolNumber'],
+              attendanceDate: attendance["attendanceDate"],
+              isPresent: attendance['isPresent']
+            })
+          });
+
+          console.log(this.attendanceList);
+          if (this.attendanceList) {
+            this.toaster.success("Found", "Successfully")
+          }
+          else {
+            this.toaster.warning("Student Not found");
+          }
+
+          this.isLoaded = true;
+        },
+          (errror) => {
+            this.toaster.error("Error occured. Please Try again later.")
+            this.isLoaded = true;
+          });
     }
   }
 }

@@ -1,6 +1,8 @@
 <div class="container">
-    <div style="text-align: center" *ngIf="users.length == 0" class="spinner-border"></div>
-    <table class="table table-striped">
+    <div style="text-align: center">
+        <div style="text-align: center" *ngIf="users.length == 0 && !isLoaded" class="spinner-border"></div>
+    </div>
+    <table class="table table-striped" *ngIf="isLoaded">
         <thead>
             <th>Symbol Number</th>
             <th>Full Name</th>
@@ -13,6 +15,11 @@
                 <td>{{ user.fullName}}</td>
                 <td>{{ user.email }}</td>
                 <td>{{ user.phoneNo }}</td>
+            </tr>
+            <tr *ngIf="users.length == 0">
+                <td></td>
+                <td>Not Available</td>
+                <td></td>
             </tr>
         </tbody>
     </table>

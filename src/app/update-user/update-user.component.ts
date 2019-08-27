@@ -10,7 +10,8 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class UpdateUserComponent implements AfterViewInit {
   isUpdated: boolean;
-  
+  isLoaded: boolean = true;
+
   constructor(private toaster: ToastrService, private userService: UserService) { }
 
   ngAfterViewInit(): void {
@@ -18,20 +19,25 @@ export class UpdateUserComponent implements AfterViewInit {
 
   updateUser(user: User) {
     console.log("update studnet clicked")
+    this.isLoaded = false;
+
     this.userService.updateUser(user)
       .subscribe((isSuccess: boolean) => {
         this.isUpdated = isSuccess;
         console.log(`Update Student: ${isSuccess}`);
 
-        if(isSuccess) {
+        if (isSuccess) {
           this.toaster.success("Student Updated Successfully");
         }
         else {
-          this.toaster.warning("Update Failed, Try again later.");
+          this.toaster.warning("Update Failed. Please try again later.");
         }
+
+        this.isLoaded = true;
       },
-      (error) => {
-        this.toaster.error("Error Occured");
-      });
+        (error) => {
+          this.toaster.error("Error Occured. Please try again later.");
+          this.isLoaded = true;
+        });
   }
 }

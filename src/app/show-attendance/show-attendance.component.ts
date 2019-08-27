@@ -18,6 +18,7 @@ export class ShowAttendanceComponent implements AfterViewInit {
   attendanceList: Array<Attendance> = [];
   displayedColumns: string[] = ['Symbol Number', 'Attendance Date', 'Is Present'];
   dataSource;
+  isLoaded: boolean;
 
   ngAfterViewInit(): void {
     //this.dataSource.paginator = this.paginator;
@@ -31,13 +32,16 @@ export class ShowAttendanceComponent implements AfterViewInit {
             attendanceDate: attendance["attendanceDate"],
             isPresent: attendance['isPresent']
           })
-
-
           //this.dataSource = new MatTableDataSource<Attendance>(this.attendanceList);
         });
 
-        this.toastr.success('Show Attendance', 'Successfull');
+        this.isLoaded = true;
+        this.toastr.success('Successfull');
         console.log(this.attendanceList);
-      });
+      },
+        (error) => {
+          this.toastr.error("Error occured. Please try again later.");
+          this.isLoaded = true;
+        });
   }
 }

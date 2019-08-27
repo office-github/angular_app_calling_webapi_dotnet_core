@@ -17,16 +17,16 @@ export class UserService {
   getUsers() {
     return this.http.get<User[]>(this.configUrl)
       .pipe(
-        retry(3), // retry a failed request up to 3 times
-        catchError(this.handleError) // then handle the error
+        retry(3) // retry a failed request up to 3 times
+        //catchError(this.handleError) // then handle the error
       );
   }
 
   getUser(symbolNo: number) {
     return this.http.get<User>(`${this.configUrl}/${symbolNo}`)
       .pipe(
-        retry(3), // retry a failed request up to 3 times
-        catchError(this.handleError) // then handle the error
+        retry(3) // retry a failed request up to 3 times
+        //catchError(this.handleError) // then handle the error
       );
   }
 
@@ -34,8 +34,8 @@ export class UserService {
     return this.http.post(
       this.configUrl, user
     ).pipe(
-      retry(3), // retry a failed request up to 3 times
-      catchError(this.handleError) // then handle the error
+      retry(3) // retry a failed request up to 3 times
+      //catchError(this.handleError) // then handle the error
     );
   }
 
@@ -43,8 +43,8 @@ export class UserService {
     return this.http.delete(
       `${this.configUrl}/${symbolNo}`
     ).pipe(
-      retry(3), // retry a failed request up to 3 times
-      catchError(this.handleError) // then handle the error
+      retry(3) // retry a failed request up to 3 times
+      //catchError(this.handleError) // then handle the error
     );
   }
 
@@ -52,8 +52,8 @@ export class UserService {
     return this.http.put(
       `${this.configUrl}/${1}`, user
     ).pipe(
-      retry(3), // retry a failed request up to 3 times
-      catchError(this.handleError) // then handle the error
+      retry(3) // retry a failed request up to 3 times
+      //catchError(this.handleError) // then handle the error
     );
   }
 

@@ -1,6 +1,7 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { User } from '../models/user';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-show-user',
@@ -8,9 +9,10 @@ import { User } from '../models/user';
   styleUrls: ['./show-user.component.css']
 })
 export class ShowUserComponent implements AfterViewInit {
-  constructor(private userService: UserService) { }
+  constructor(private toaster: ToastrService, private userService: UserService) { }
 
   users: Array<User> = [];
+  isLoaded: boolean;
 
   ngAfterViewInit(): void {
     console.log("show studnets clicked")
@@ -25,7 +27,11 @@ export class ShowUserComponent implements AfterViewInit {
           })
         });
 
+        this.isLoaded = true;
         console.log(this.users);
+      }, (error) => {
+        this.isLoaded = true;
+        this.toaster.error("Failed. Please try again later.")
       });
   }
 }

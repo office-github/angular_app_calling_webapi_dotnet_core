@@ -9,7 +9,9 @@
             <button type="submit" class="btn btn-primary">Search User</button>
         </div>
     </form>
-    <div style="text-align: center" [hidden]="user" class="spinner-border"></div>
+    <div style="text-align: center">
+        <div style="text-align: center" *ngIf="!isLoaded" class="spinner-border"></div>
+    </div>
     <table class="table table-striped" *ngIf="user">
         <thead>
             <th>Symbol Number</th>

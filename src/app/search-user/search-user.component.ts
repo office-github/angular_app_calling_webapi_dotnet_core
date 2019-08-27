@@ -11,36 +11,41 @@ import { ToastrService } from 'ngx-toastr';
 export class SearchUserComponent implements AfterViewInit {
   user: User;
   symbolNumber: number;
+  isLoaded: boolean = true;
 
   constructor(private toaster: ToastrService, private userService: UserService) { }
-  
+
   ngAfterViewInit(): void {
-    
+
   }
 
   searchUser() {
     console.log("search student clicked")
-    
-    if(this.symbolNumber) {
-    this.userService.getUser(this.symbolNumber)
-      .subscribe((user: User) => {
-        this.user = {
-          symbolNumber: user['symbolNumber'],
-          fullName: user["fullName"],
-          email: user['email'],
-          phoneNo: user["phoneNo"]
-        }
-        console.log(this.user);
-        if(this.user) {
-          this.toaster.success("Found", "Successfully")
-        }
-        else {
-          this.toaster.warning("Not found");
-        }
-      },
-      (errror) => {
-        this.toaster.error("Error occured", "Please Try again later.")
-      });
+    this.isLoaded = false;
+
+    if (this.symbolNumber) {
+      this.userService.getUser(this.symbolNumber)
+        .subscribe((user: User) => {
+          this.user = {
+            symbolNumber: user['symbolNumber'],
+            fullName: user["fullName"],
+            email: user['email'],
+            phoneNo: user["phoneNo"]
+          }
+          console.log(this.user);
+          if (this.user) {
+            this.toaster.success("Found Successfully")
+          }
+          else {
+            this.toaster.warning("Student Not found");
+          }
+
+          this.isLoaded = true;
+        },
+          (errror) => {
+            this.toaster.error("Error occured. Please try again later.")
+            this.isLoaded = true;
+          });
     }
   }
 }

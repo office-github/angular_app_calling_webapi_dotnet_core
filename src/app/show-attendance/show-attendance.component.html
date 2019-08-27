@@ -1,7 +1,9 @@
 <!-- <mat-progress-bar mode="Indeterminate" *ngIf="attendanceList.length <= 0"></mat-progress-bar> -->
 <div class="container">
-    <div style="text-align: center" *ngIf="attendanceList.length == 0" class="spinner-border"></div>
-    <table class="table table-striped">
+    <div style="text-align: center">
+        <div style="text-align: center" *ngIf="attendanceList.length == 0 && !isLoaded" class="spinner-border"></div>
+    </div>
+    <table class="table table-striped" *ngIf="isLoaded">
         <thead>
             <th>Symbol Number</th>
             <th>Attendance Date</th>
@@ -12,6 +14,11 @@
                 <td>{{ attendance.symbolNumber}}</td>
                 <td>{{ attendance.attendanceDate}}</td>
                 <td>{{ attendance.isPresent}}</td>
+            </tr>
+            <tr *ngIf="attendanceList.length == 0">
+                <td></td>
+                <td>Not Available</td>
+                <td></td>
             </tr>
         </tbody>
     </table>

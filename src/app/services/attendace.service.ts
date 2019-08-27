@@ -16,16 +16,16 @@ export class AttendaceService {
   getAttendance() {
     return this.http.get<Attendance[]>(this.configUrl)
       .pipe(
-        retry(3), // retry a failed request up to 3 times
-        catchError(this.handleError) // then handle the error
+        retry(3) // retry a failed request up to 3 times
+        //catchError(this.handleError) // then handle the error
       );
   }
 
   searchAttendance(symbolNo: number) {
     return this.http.get<Attendance[]>(`${this.configUrl}/${symbolNo}`)
       .pipe(
-        retry(3), // retry a failed request up to 3 times
-        catchError(this.handleError) // then handle the error
+        retry(3) // retry a failed request up to 3 times
+        //catchError(this.handleError) // then handle the error
       );
   }
 
