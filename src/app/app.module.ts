@@ -2,7 +2,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatProgressBarModule} from '@angular/material'
+import { MatProgressBarModule } from '@angular/material'
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
 import { FormsModule } from '@angular/forms';
  
 import { ToastrModule } from 'ngx-toastr';
@@ -39,6 +41,8 @@ import { ErrorComponent } from './error/error.component';
     HttpClientModule,
     BrowserAnimationsModule, // required animations module
     MatProgressBarModule,
+    MatPaginatorModule,
+    MatTableModule,
     ToastrModule.forRoot() // ToastrModule added
   ],
   providers: [UserService, AttendaceService],

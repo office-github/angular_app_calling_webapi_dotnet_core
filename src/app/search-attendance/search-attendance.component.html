@@ -1,12 +1,28 @@
-<div>
-    <input type="number" [(ngModel)]="symbolNumber" />
-    <input type="submit" (click)="searchAttendance()" />
-</div>
+<div class="container">
+    <h5 style="text-align:center">Search Attendance</h5>
+    <form #form='ngForm' ngNativeValidate (ngSubmit)='searchAttendance(form.value)'>
+        <div class="form-group">
+            <input type="number" class="form-control" [(ngModel)]="symbolNumber" name="symbolNumber"
+                placeholder="Enter Symbol Number" required />
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Search Attendance</button>
+        </div>
+    </form>
 
-<div *ngIf="attendanceList">
-    <ul *ngFor="let attendance of attendanceList">
-        <li>{{ attendance.symbolNumber }}</li>
-        <li>{{ attendance.attendanceDate}}</li>
-        <li>{{ attendance.isPresent }}</li>
-    </ul>
+    <div style="text-align: center" *ngIf="attendanceList.length == 0" class="spinner-border"></div>
+    <table class="table table-striped">
+        <thead>
+            <th>Symbol Number</th>
+            <th>Attendance Date</th>
+            <th>Is Present</th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let attendance of attendanceList">
+                <td>{{ attendance.symbolNumber}}</td>
+                <td>{{ attendance.attendanceDate}}</td>
+                <td>{{ attendance.isPresent}}</td>
+            </tr>
+        </tbody>
+    </table>
 </div>

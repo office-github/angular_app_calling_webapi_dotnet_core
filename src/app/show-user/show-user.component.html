@@ -1,10 +1,19 @@
-<mat-progress-bar mode="Indeterminate" *ngIf="!users"></mat-progress-bar>
-
-<div *ngIf="users">
-    <ul *ngFor="let user of users" style="display: block">
-        <li>{{ user.symbolNumber }}</li>
-        <li>{{ user.fullName}}</li>
-        <li>{{ user.email }}</li>
-        <li>{{ user.phoneNo }}</li>
-    </ul>
+<div class="container">
+    <div style="text-align: center" *ngIf="users.length == 0" class="spinner-border"></div>
+    <table class="table table-striped">
+        <thead>
+            <th>Symbol Number</th>
+            <th>Full Name</th>
+            <th>email</th>
+            <th>Phone Number</th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of users">
+                <td>{{ user.symbolNumber }}</td>
+                <td>{{ user.fullName}}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.phoneNo }}</td>
+            </tr>
+        </tbody>
+    </table>
 </div>

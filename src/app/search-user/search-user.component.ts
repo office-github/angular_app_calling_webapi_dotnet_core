@@ -20,6 +20,7 @@ export class SearchUserComponent implements AfterViewInit {
 
   searchUser() {
     console.log("search student clicked")
+    
     if(this.symbolNumber) {
     this.userService.getUser(this.symbolNumber)
       .subscribe((user: User) => {

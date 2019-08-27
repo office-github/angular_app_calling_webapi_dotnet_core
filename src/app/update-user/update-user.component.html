@@ -1,17 +1,21 @@
-<form #form='ngForm' ngNativeValidate (ngSubmit)='updateUser(form.value)'>
-        <div>
-            <input type="number" [(ngModel)]="symbolNumber" name="symbolNumber" placeholder="Enter Symbol Number" required />
+<div class="container">
+    <h5 style="text-align:center">Update Student</h5>
+    <form #form='ngForm' ngNativeValidate (ngSubmit)='updateUser(form.value)'>
+        <div class="form-group">
+            <input type="number" class="form-control" [(ngModel)]="symbolNumber" name="symbolNumber" placeholder="Enter Symbol Number"
+                required />
         </div>
-        <div>
-            <input type="text" [(ngModel)]="fullName" name="fullName" placeholder="Enter Full Name" required />
+        <div class="form-group">
+            <input type="text" class="form-control" [(ngModel)]="fullName" name="fullName" placeholder="Enter Full Name" required />
         </div>
-        <div>
-            <input type="email" [(ngModel)]="email" name="email" placeholder="Enter Email" required />
+        <div class="form-group">
+            <input type="email" class="form-control" [(ngModel)]="email" name="email" placeholder="Enter Email" required />
         </div>
-        <div>
-            <input type="number" [(ngModel)]="phoneNo" name="phoneNo" placeholder="Enter Phone Number" required/>
+        <div class="form-group">
+            <input type="number" class="form-control" class="form-control" [(ngModel)]="phoneNo" name="phoneNo" placeholder="Enter Phone Number" required />
         </div>
-        <div>
-            <button type="submit">Update User</button>>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Update User</button>
         </div>
     </form>
+</div>

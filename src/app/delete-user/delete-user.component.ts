@@ -18,7 +18,7 @@ export class DeleteUserComponent implements AfterViewInit {
   }
 
   deleteUser() {
-    console.log("delete studnet clicked")
+    console.log("delete student clicked")
 
     if (this.symbolNumber) {
       this.userService.deleteUser(this.symbolNumber)

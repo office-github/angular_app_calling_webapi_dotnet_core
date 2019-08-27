@@ -1,13 +1,29 @@
-<p>search-user works!</p>
-
-<div>
-    <input type="number" [(ngModel)]="symbolNumber" />
-    <input type="submit" (click)="searchUser()" />
-
-    <ul *ngIf="user">
-        <li>{{ user.symbolNumber }}</li>
-        <li>{{ user.fullName}}</li>
-        <li>{{ user.email }}</li>
-        <li>{{ user.phoneNo }}</li>
-    </ul>
+<div class="container">
+    <h5 style="text-align:center">Search Student</h5>
+    <form #form='ngForm' ngNativeValidate (ngSubmit)='searchUser(form.value)'>
+        <div class="form-group">
+            <input type="number" class="form-control" [(ngModel)]="symbolNumber" name="symbolNumber"
+                placeholder="Enter Symbol Number" required />
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Search User</button>
+        </div>
+    </form>
+    <div style="text-align: center" [hidden]="user" class="spinner-border"></div>
+    <table class="table table-striped" *ngIf="user">
+        <thead>
+            <th>Symbol Number</th>
+            <th>Full Name</th>
+            <th>email</th>
+            <th>Phone Number</th>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ user.symbolNumber }}</td>
+                <td>{{ user.fullName}}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.phoneNo }}</td>
+            </tr>
+        </tbody>
+    </table>
 </div>
