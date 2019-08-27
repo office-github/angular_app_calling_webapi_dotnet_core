@@ -5,8 +5,11 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 ## After cloning or downloading this project, install the below stuffs
 
 ng add @angular/material
+
 npm install ngx-toastr --save
+
 npm install @angular/animations --save
+
 npm install bootstrap jquery popper.js --save
 
 ## Development server
