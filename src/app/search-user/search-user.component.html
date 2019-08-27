@@ -12,7 +12,7 @@
     <div style="text-align: center">
         <div style="text-align: center" *ngIf="!isLoaded" class="spinner-border"></div>
     </div>
-    <table class="table table-striped" *ngIf="user">
+    <table class="table table-striped" *ngIf="user && user.symbolNumber > 0">
         <thead>
             <th>Symbol Number</th>
             <th>Full Name</th>

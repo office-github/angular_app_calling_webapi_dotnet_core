@@ -33,7 +33,7 @@ export class SearchUserComponent implements AfterViewInit {
             phoneNo: user["phoneNo"]
           }
           console.log(this.user);
-          if (this.user) {
+          if (this.user && this.user.symbolNumber > 0) {
             this.toaster.success("Found Successfully")
           }
           else {
