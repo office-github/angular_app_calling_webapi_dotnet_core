@@ -2,6 +2,16 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.0.
 
+## After cloning or downloading this project, install the below stuffs
+
+ng add @angular/material
+
+npm install ngx-toastr --save
+
+npm install @angular/animations --save
+
+npm install bootstrap jquery popper.js --save
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
