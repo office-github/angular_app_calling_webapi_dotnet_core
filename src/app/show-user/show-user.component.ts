@@ -2,6 +2,7 @@ import { Component, AfterViewInit } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { User } from '../models/user';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-show-user',
@@ -9,7 +10,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./show-user.component.css']
 })
 export class ShowUserComponent implements AfterViewInit {
-  constructor(private toaster: ToastrService, private userService: UserService) { }
+  constructor(private router: Router, private toaster: ToastrService, private userService: UserService) { }
 
   users: Array<User> = [];
   isLoaded: boolean;
@@ -33,5 +34,9 @@ export class ShowUserComponent implements AfterViewInit {
         this.isLoaded = true;
         this.toaster.error("Failed. Please try again later.")
       });
+  }
+
+  deleteUser(symbolNumber) {
+    console.log(symbolNumber);
   }
 }

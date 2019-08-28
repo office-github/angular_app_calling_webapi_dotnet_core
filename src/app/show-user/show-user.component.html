@@ -8,6 +8,7 @@
             <th>Full Name</th>
             <th>email</th>
             <th>Phone Number</th>
+            <th>Action</th>
         </thead>
         <tbody>
             <tr *ngFor="let user of users">
@@ -15,6 +16,11 @@
                 <td>{{ user.fullName}}</td>
                 <td>{{ user.email }}</td>
                 <td>{{ user.phoneNo }}</td>
+                <td>
+                    <button type="button" class="btn btn-danger" (click)="deleteUser(user.symbolNumber)">Delete</button>
+                    <button type="button" class="btn btn-warning ml-2"
+                        routerLink='/update/{{user.symbolNumber}}'>Edit</button>
+                </td>
             </tr>
             <tr *ngIf="users.length == 0">
                 <td></td>

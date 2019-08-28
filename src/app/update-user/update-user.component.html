@@ -3,21 +3,17 @@
     <div style="text-align: center">
         <div style="text-align: center" *ngIf="!isLoaded" class="spinner-border"></div>
     </div>
-    <form #form='ngForm' ngNativeValidate (ngSubmit)='updateUser(form.value)'>
+    <form #form='ngForm' *ngIf="user && user.symbolNumber > 0" ngNativeValidate (ngSubmit)='updateUser(form.value)'>
         <div class="form-group">
-            <input type="number" class="form-control" [(ngModel)]="symbolNumber" name="symbolNumber"
-                placeholder="Enter Symbol Number" required />
+            <input type="text" class="form-control" [(ngModel)]="user.fullName" name="fullName"
+                placeholder="Enter Full Name" required />
         </div>
         <div class="form-group">
-            <input type="text" class="form-control" [(ngModel)]="fullName" name="fullName" placeholder="Enter Full Name"
+            <input type="email" class="form-control" [(ngModel)]="user.email" name="email" placeholder="Enter Email"
                 required />
         </div>
         <div class="form-group">
-            <input type="email" class="form-control" [(ngModel)]="email" name="email" placeholder="Enter Email"
-                required />
-        </div>
-        <div class="form-group">
-            <input type="number" class="form-control" class="form-control" [(ngModel)]="phoneNo" name="phoneNo"
+            <input type="number" class="form-control" class="form-control" [(ngModel)]="user.phoneNo" name="phoneNo"
                 placeholder="Enter Phone Number" required />
         </div>
         <div class="form-group">
