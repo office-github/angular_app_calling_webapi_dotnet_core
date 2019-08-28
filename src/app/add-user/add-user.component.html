@@ -1,11 +1,10 @@
 <div class="container">
-    <h5 style="text-align:center">Add Student</h5>
-    <div style="text-align: center">
-        <div style="text-align: center" *ngIf="!isLoaded" class="spinner-border"></div>
+    <div style="text-align: center; margin-top: 10px">
+        <div *ngIf="!isLoaded" class="spinner-border"></div>
     </div>
     <form #form='ngForm' ngNativeValidate (ngSubmit)='addUser(form.value)'>
         <div class="form-group">
-            <input type="number" class="form-control" [(ngModel)]="symbolNumber" name="symbolNumber"
+            <input type="number" min="1" class="form-control" [(ngModel)]="symbolNumber" name="symbolNumber"
                 placeholder="Enter Symbol Number" required />
         </div>
         <div class="form-group">
@@ -17,7 +16,7 @@
                 required />
         </div>
         <div class="form-group">
-            <input type="number" class="form-control" class="form-control" [(ngModel)]="phoneNo" name="phoneNo"
+            <input type="number" min=9111111111 max="9900000000" class="form-control" class="form-control" [(ngModel)]="phoneNo" name="phoneNo"
                 placeholder="Enter Phone Number" required />
         </div>
         <div class="form-group">

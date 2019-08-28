@@ -36,7 +36,29 @@ export class ShowUserComponent implements AfterViewInit {
       });
   }
 
-  deleteUser(symbolNumber) {
-    console.log(symbolNumber);
+  deleteUser(symbolNumber: number) {
+    this.isLoaded = false;
+    
+    if (symbolNumber) {
+      this.userService.deleteUser(symbolNumber)
+        .subscribe((isSuccess: boolean) => {
+          console.log(`Delete: ${isSuccess}`);
+
+          if (isSuccess) {
+            this.toaster.success("Deleted Successfully");
+            this.users.forEach( (user, index) => {
+              if(user.symbolNumber === symbolNumber)
+              this.users.splice(index,1);
+            });
+          }
+          else
+            this.toaster.warning("Student Not found");
+          this.isLoaded = true;
+        },
+          (error) => {
+            this.toaster.error("Failed. Please Try again later.");
+            this.isLoaded = true;
+          });
+    }
   }
 }

@@ -44,4 +44,30 @@ export class ShowAttendanceComponent implements AfterViewInit {
           this.isLoaded = true;
         });
   }
+
+  deleteAttendance(symbolNumber: number) {
+    this.isLoaded = false;
+    
+    if (symbolNumber) {
+      this.attendanceService.deleteAttendance(symbolNumber)
+        .subscribe((isSuccess: boolean) => {
+          console.log(`Delete: ${isSuccess}`);
+
+          if (isSuccess) {
+            this.toastr.success("Deleted Successfully");
+            this.attendanceList.forEach((attendace, index) => {
+              if (attendace.symbolNumber === symbolNumber)
+                this.attendanceList.splice(index, 1);
+            });
+          }
+          else
+            this.toastr.warning("Attendance Not found");
+          this.isLoaded = true;
+        },
+          (error) => {
+            this.toastr.error("Failed. Please Try again later.");
+            this.isLoaded = true;
+          });
+    }
+  }
 }

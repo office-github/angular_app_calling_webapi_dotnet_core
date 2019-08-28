@@ -15,7 +15,7 @@ const routes: Routes = [
   { path: 'add-user', component: AddUserComponent },
   { path: 'search-user', component: SearchUserComponent },
   { path: 'delete-user', component: DeleteUserComponent },
-  { path: 'update/:symbolNumber', component: UpdateUserComponent },
+  { path: 'update-user/:symbolNumber', component: UpdateUserComponent },
   { path: 'show-attendance', component: ShowAttendanceComponent },
   { path: 'search-attendance', component: SearchAttendanceComponent },
   { path: '', redirectTo: '/show-attendance', pathMatch: 'full' },

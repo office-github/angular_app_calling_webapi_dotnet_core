@@ -10,10 +10,10 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./update-user.component.css']
 })
 export class UpdateUserComponent implements AfterViewInit {
-  isUpdated: boolean;
   isLoaded: boolean = true;
-  //symbolNumber: number;
+  isModified: boolean;
   user: User;
+  oldUser: User;
 
   constructor(private activatedRoute: ActivatedRoute, private toaster: ToastrService, private userService: UserService) { }
 
@@ -31,6 +31,13 @@ export class UpdateUserComponent implements AfterViewInit {
             email: user['email'],
             phoneNo: user["phoneNo"]
           }
+
+          this.oldUser = {
+            symbolNumber: user['symbolNumber'],
+            fullName: user["fullName"],
+            email: user['email'],
+            phoneNo: user["phoneNo"]
+          };
           console.log(this.user);
           if (this.user && this.user.symbolNumber > 0) {
             this.toaster.success("Found Successfully")
@@ -50,25 +57,42 @@ export class UpdateUserComponent implements AfterViewInit {
 
   updateUser() {
     console.log("update studnet clicked")
+    console.log(this.oldUser);
     this.isLoaded = false;
 
-    this.userService.updateUser(this.user)
-      .subscribe((isSuccess: boolean) => {
-        this.isUpdated = isSuccess;
-        console.log(`Update Student: ${isSuccess}`);
+    if (this.isUpdated()) {
+      this.userService.updateUser(this.user)
+        .subscribe((isSuccess: boolean) => {
+          console.log(`Update Student: ${isSuccess}`);
 
-        if (isSuccess) {
-          this.toaster.success("Student Updated Successfully");
-        }
-        else {
-          this.toaster.warning("Update Failed. Please try again later.");
-        }
+          if (isSuccess) {
+            this.toaster.success("Student Updated Successfully");
+          }
+          else {
+            this.toaster.warning("Update Failed. Please try again later.");
+          }
 
-        this.isLoaded = true;
-      },
-        (error) => {
-          this.toaster.error("Error Occured. Please try again later.");
           this.isLoaded = true;
-        });
+        },
+          (error) => {
+            this.toaster.error("Error Occured. Please try again later.");
+            this.isLoaded = true;
+          });
+    }
+  }
+
+  private isUpdated(): boolean {
+    if (this.user.symbolNumber == this.oldUser.symbolNumber) {
+      if (this.user.fullName != this.oldUser.fullName || this.user.email != this.oldUser.email
+         || (this.user.phoneNo != this.oldUser.phoneNo && this.user.phoneNo > 9111111111
+         && this.user.phoneNo < 9900000000)) {
+        this.isModified = true;
+      }
+      else {
+        this.isModified = false;
+      }
+    }
+
+    return this.isModified;
   }
 }

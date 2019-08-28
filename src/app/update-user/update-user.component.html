@@ -1,23 +1,29 @@
 <div class="container">
-    <h5 style="text-align:center">Update Student</h5>
-    <div style="text-align: center">
-        <div style="text-align: center" *ngIf="!isLoaded" class="spinner-border"></div>
+    <div style="text-align: center; margin-top: 10px">
+        <div *ngIf="!isLoaded" class="spinner-border"></div>
     </div>
-    <form #form='ngForm' *ngIf="user && user.symbolNumber > 0" ngNativeValidate (ngSubmit)='updateUser(form.value)'>
+    <form #myForm='ngForm' *ngIf="user && user.symbolNumber > 0" ngNativeValidate (ngSubmit)='updateUser(form.value)'>
         <div class="form-group">
-            <input type="text" class="form-control" [(ngModel)]="user.fullName" name="fullName"
+            <label for="symbolNumber">Symbol Number</label>
+            <input type="number" min="1" class="form-control" disabled class="form-control" [(ngModel)]="user.symbolNumber" name="symbolNumber" />
+        </div>
+        <div class="form-group">
+            <label for="fullName">Full Name</label>
+            <input type="text" class="form-control" [(ngModel)]="user.fullName" name="fullName" (ngModelChange)="isUpdated()"
                 placeholder="Enter Full Name" required />
         </div>
         <div class="form-group">
-            <input type="email" class="form-control" [(ngModel)]="user.email" name="email" placeholder="Enter Email"
+            <label for="email">Email</label>
+            <input type="email" class="form-control" [(ngModel)]="user.email" name="email" placeholder="Enter Email" (ngModelChange)="isUpdated()"
                 required />
         </div>
         <div class="form-group">
-            <input type="number" class="form-control" class="form-control" [(ngModel)]="user.phoneNo" name="phoneNo"
+                <label for="phoneNo">Phone Number</label>
+            <input type="number" class="form-control"  min=9111111111 max=9900000000 [(ngModel)]="user.phoneNo" name="phoneNo" (ngModelChange)="isUpdated()"
                 placeholder="Enter Phone Number" required />
         </div>
-        <div class="form-group">
-            <button type="submit" class="btn btn-primary">Update User</button>
+        <div class="form-group" title="first update the user record to apply update">
+            <button type="submit" [disabled]="!isModified" class="btn btn-primary">Update User</button>
         </div>
     </form>
 </div>
