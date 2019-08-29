@@ -11,6 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 export class AddUserComponent implements AfterViewInit {
   isAdded: boolean;
   isValidUserInformation: boolean;
+  isTaken: boolean;
   isLoaded: boolean = true;
 
   constructor(private toaster: ToastrService, private userService: UserService) { }
@@ -33,7 +34,7 @@ export class AddUserComponent implements AfterViewInit {
             this.toaster.success("Student Added Successfully");
           }
           else {
-            this.toaster.warning("Add Failed. Please try again later.");
+            this.toaster.warning("Add Failed Please try again later.");
           }
 
           this.isLoaded = true;
@@ -42,6 +43,9 @@ export class AddUserComponent implements AfterViewInit {
             this.toaster.error("Error Occured. Please try again later.");
             this.isLoaded = true;
           });
+    }
+    else {
+      this.toaster.error("Please provide valid student information");
     }
   }
 
@@ -56,5 +60,21 @@ export class AddUserComponent implements AfterViewInit {
     }
 
     return this.isValidUserInformation;
+  }
+
+  isSymbolNumberTaken(user: User) {
+    if(user && user.symbolNumber > 0) {
+      this.userService.getUser(user.symbolNumber).subscribe((isSuccess) => {
+        if(isSuccess) {
+          this.isTaken = true;
+        }
+        else {
+          this.isTaken = false;
+        }
+      })
+    }
+    else {
+      this.isTaken = false;
+    }
   }
 }

@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 
 import { AttendaceService } from '../services/attendace.service';
 import { Attendance } from '../models/attendance';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-show-attendance',
@@ -16,6 +17,8 @@ export class ShowAttendanceComponent implements AfterViewInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   attendanceList: Array<Attendance> = [];
+  originalAttendanceList: Array<Attendance> = []
+  searchText: string;
   displayedColumns: string[] = ['Symbol Number', 'Attendance Date', 'Is Present'];
   dataSource;
   isLoaded: boolean;
@@ -32,6 +35,8 @@ export class ShowAttendanceComponent implements AfterViewInit {
             attendanceDate: attendance["attendanceDate"],
             isPresent: attendance['isPresent']
           })
+
+          this.originalAttendanceList.push(...this.attendanceList)
           //this.dataSource = new MatTableDataSource<Attendance>(this.attendanceList);
         });
 
@@ -68,6 +73,23 @@ export class ShowAttendanceComponent implements AfterViewInit {
             this.toastr.error("Failed. Please Try again later.");
             this.isLoaded = true;
           });
+    }
+  }
+
+  searchAttendance() {
+    if (!environment.production) {
+      console.log("search attendance clicked")
+    }
+
+    if (this.searchText) {
+      let search = this.searchText.toLocaleLowerCase();
+
+      this.attendanceList = this.originalAttendanceList.filter((attendance, index) => attendance.symbolNumber.toString().includes(search)
+        || attendance.attendanceDate.toString().toLocaleLowerCase().includes(search) || String(attendance.isPresent).toLocaleLowerCase().includes(search))
+    }
+    else {
+      this.attendanceList = [];
+      this.attendanceList.push(...this.originalAttendanceList);
     }
   }
 }

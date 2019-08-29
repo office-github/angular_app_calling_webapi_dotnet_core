@@ -2,6 +2,7 @@ import { Component, AfterViewInit } from '@angular/core';
 import { User } from '../models/user';
 import { UserService } from '../services/user.service';
 import { ToastrService } from 'ngx-toastr';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-search-user',
@@ -9,7 +10,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./search-user.component.css']
 })
 export class SearchUserComponent implements AfterViewInit {
-  user: User;
+  user: User = null;
   symbolNumber: number;
   isLoaded: boolean = true;
 
@@ -20,7 +21,10 @@ export class SearchUserComponent implements AfterViewInit {
   }
 
   searchUser() {
-    console.log("search student clicked")
+    if (!environment.production) {
+      console.log("search student clicked")
+    }
+
     this.isLoaded = false;
 
     if (this.symbolNumber) {
@@ -32,20 +36,25 @@ export class SearchUserComponent implements AfterViewInit {
             email: user['email'],
             phoneNo: user["phoneNo"]
           }
-          console.log(this.user);
-          if (this.user && this.user.symbolNumber > 0) {
-            this.toaster.success("Found Successfully")
-          }
-          else {
-            this.toaster.warning("Student Not found");
-          }
 
+          if (!environment.production) {
+            console.log(this.user);
+          }
+          if (this.user && this.user.symbolNumber > 0)
+            this.toaster.success("Student Found")
+          else
+            this.toaster.error("Student not found")
+            
           this.isLoaded = true;
         },
           (errror) => {
             this.toaster.error("Error occured. Please try again later.")
             this.isLoaded = true;
           });
+    }
+    else {
+      this.user = null;
+      this.isLoaded = true;
     }
   }
 }

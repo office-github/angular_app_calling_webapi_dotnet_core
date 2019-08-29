@@ -26,7 +26,6 @@ export class SearchAttendanceComponent implements AfterViewInit {
     this.attendanceList = [];
 
     if (this.symbolNumber) {
-      console.log("show attendance clicked")
       this.attendanceService.searchAttendance(this.symbolNumber)
         .subscribe((attendanceList: Attendance[]) => {
           attendanceList.forEach(attendance => {

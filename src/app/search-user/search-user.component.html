@@ -11,7 +11,7 @@
     <div style="text-align: center; margin-top: 10px">
         <div *ngIf="!isLoaded" class="spinner-border"></div>
     </div>
-    <table class="table table-striped" *ngIf="user && user.symbolNumber > 0">
+    <table class="table table-striped">
         <thead>
             <th>Symbol Number</th>
             <th>Full Name</th>
@@ -19,11 +19,17 @@
             <th>Phone Number</th>
         </thead>
         <tbody>
-            <tr>
+            <tr *ngIf="user && user.symbolNumber > 0">
                 <td>{{ user.symbolNumber }}</td>
                 <td>{{ user.fullName}}</td>
                 <td>{{ user.email }}</td>
                 <td>{{ user.phoneNo }}</td>
+            </tr>
+            <tr *ngIf="user && user.symbolNumber == 0">
+                <td style="text-align: center" colspan="4">Not Found</td>
+            </tr>
+            <tr *ngIf="user == null">
+                <td style="text-align: center" colspan="4">Search User</td>
             </tr>
         </tbody>
     </table>

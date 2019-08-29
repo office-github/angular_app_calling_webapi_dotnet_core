@@ -3,6 +3,7 @@ import { UserService } from '../services/user.service';
 import { User } from '../models/user';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-show-user',
@@ -13,6 +14,8 @@ export class ShowUserComponent implements AfterViewInit {
   constructor(private router: Router, private toaster: ToastrService, private userService: UserService) { }
 
   users: Array<User> = [];
+  originalUsers: Array<User> = []
+  searchText: string;
   isLoaded: boolean;
 
   ngAfterViewInit(): void {
@@ -28,6 +31,7 @@ export class ShowUserComponent implements AfterViewInit {
           })
         });
 
+        this.originalUsers.push(...this.users);
         this.isLoaded = true;
         console.log(this.users);
       }, (error) => {
@@ -38,7 +42,7 @@ export class ShowUserComponent implements AfterViewInit {
 
   deleteUser(symbolNumber: number) {
     this.isLoaded = false;
-    
+
     if (symbolNumber) {
       this.userService.deleteUser(symbolNumber)
         .subscribe((isSuccess: boolean) => {
@@ -46,9 +50,9 @@ export class ShowUserComponent implements AfterViewInit {
 
           if (isSuccess) {
             this.toaster.success("Deleted Successfully");
-            this.users.forEach( (user, index) => {
-              if(user.symbolNumber === symbolNumber)
-              this.users.splice(index,1);
+            this.users.forEach((user, index) => {
+              if (user.symbolNumber === symbolNumber)
+                this.users.splice(index, 1);
             });
           }
           else
@@ -59,6 +63,24 @@ export class ShowUserComponent implements AfterViewInit {
             this.toaster.error("Failed. Please Try again later.");
             this.isLoaded = true;
           });
+    }
+  }
+
+  searchUser() {
+    if (!environment.production) {
+      console.log("search student clicked")
+    }
+
+    if (this.searchText) {
+      let search = this.searchText.toLocaleLowerCase();
+
+      this.users = this.originalUsers.filter((user, index) => user.symbolNumber.toString().includes(search)
+        || user.fullName.toLocaleLowerCase().includes(search) || user.email.toLocaleLowerCase().includes(search)
+        || user.phoneNo.toString().includes(search))
+    }
+    else {
+      this.users = [];
+      this.users.push(...this.originalUsers);
     }
   }
 }
