@@ -4,6 +4,10 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## After cloning or downloading this project, install the below stuffs
 
+npm install
+
+npm install -g @angular/cli
+
 ng add @angular/material
 
 npm install ngx-toastr --save
