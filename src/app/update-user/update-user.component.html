@@ -2,7 +2,7 @@
     <div style="text-align: center; margin-top: 10px">
         <div *ngIf="!isLoaded" class="spinner-border"></div>
     </div>
-    <form #myForm='ngForm' *ngIf="user && user.symbolNumber > 0" ngNativeValidate (ngSubmit)='updateUser(form.value)'>
+    <form #myForm='ngForm' *ngIf="user && user.symbolNumber > 0" ngNativeValidate (ngSubmit)='updateUser()'>
         <div class="form-group">
             <label for="symbolNumber">Symbol Number</label>
             <input type="number" min="1" class="form-control" disabled class="form-control" [(ngModel)]="user.symbolNumber" name="symbolNumber" />

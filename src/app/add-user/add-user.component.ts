@@ -13,6 +13,10 @@ export class AddUserComponent implements AfterViewInit {
   isValidUserInformation: boolean;
   isTaken: boolean;
   isLoaded: boolean = true;
+  symbolNumber: number
+  fullName: String
+  email: String
+  phoneNo: number
 
   constructor(private toaster: ToastrService, private userService: UserService) { }
 

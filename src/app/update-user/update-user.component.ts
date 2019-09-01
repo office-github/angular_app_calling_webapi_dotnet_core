@@ -81,7 +81,7 @@ export class UpdateUserComponent implements AfterViewInit {
     }
   }
 
-  private isUpdated(): boolean {
+  isUpdated(): boolean {
     if (this.user.symbolNumber == this.oldUser.symbolNumber) {
       if (this.user.fullName != this.oldUser.fullName || this.user.email != this.oldUser.email
          || (this.user.phoneNo != this.oldUser.phoneNo && this.user.phoneNo > 9111111111

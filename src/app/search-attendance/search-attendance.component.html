@@ -1,5 +1,5 @@
 <div class="container">
-    <form #form='ngForm' ngNativeValidate (ngSubmit)='searchAttendance(form.value)'>
+    <form #form='ngForm' ngNativeValidate (ngSubmit)='searchAttendance()'>
         <div class="form-group">
             <input type="number" min="1" class="form-control" [(ngModel)]="symbolNumber" name="symbolNumber"
                 placeholder="Enter Symbol Number" required />

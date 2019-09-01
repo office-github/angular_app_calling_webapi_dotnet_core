@@ -2,7 +2,7 @@
     <div style="text-align: center; margin-top: 10px">
         <div *ngIf="!isLoaded" class="spinner-border"></div>
     </div>
-    <form #form='ngForm' ngNativeValidate (ngSubmit)='deleteUser(form.value)'>
+    <form #form='ngForm' ngNativeValidate (ngSubmit)='deleteUser()'>
         <div class="form-group">
             <input type="number" min="1" class="form-control" [(ngModel)]="symbolNumber" name="symbolNumber"
                 placeholder="Enter Symbol Number" required />
