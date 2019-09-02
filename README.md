@@ -4,6 +4,8 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## After cloning or downloading this project, install the below stuffs
 
+download node.js from this site (https://nodejs.org/en/)
+
 npm install
 
 npm install -g @angular/cli
