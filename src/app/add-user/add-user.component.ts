@@ -28,29 +28,24 @@ export class AddUserComponent implements AfterViewInit {
     this.isLoaded = false;
     console.log("Add studnet clicked")
 
-    if (this.isValid(user)) {
-      this.userService.addUser(user)
-        .subscribe((isSuccess: boolean) => {
-          this.isAdded = isSuccess;
-          console.log(`Add Student: ${isSuccess}`);
+    this.userService.addUser(user)
+      .subscribe((isSuccess: boolean) => {
+        this.isAdded = isSuccess;
+        console.log(`Add Student: ${isSuccess}`);
 
-          if (isSuccess) {
-            this.toaster.success("Student Added Successfully");
-          }
-          else {
-            this.toaster.warning("Add Failed Please try again later.");
-          }
+        if (isSuccess) {
+          this.toaster.success("Student Added Successfully");
+        }
+        else {
+          this.toaster.warning("Add Failed Please try again later.");
+        }
 
+        this.isLoaded = true;
+      },
+        (error) => {
+          this.toaster.error("Error Occured. Please try again later.");
           this.isLoaded = true;
-        },
-          (error) => {
-            this.toaster.error("Error Occured. Please try again later.");
-            this.isLoaded = true;
-          });
-    }
-    else {
-      this.toaster.error("Please provide valid student information");
-    }
+        });
   }
 
   isValid(user: User): boolean {
@@ -67,9 +62,9 @@ export class AddUserComponent implements AfterViewInit {
   }
 
   isSymbolNumberTaken(user: User) {
-    if(user && user.symbolNumber > 0) {
+    if (user && user.symbolNumber > 0) {
       this.userService.getUser(user.symbolNumber).subscribe((isSuccess) => {
-        if(isSuccess) {
+        if (isSuccess) {
           this.isTaken = true;
         }
         else {
